@@ -1,0 +1,60 @@
+{% load my_tags %}
+<head>
+    <style>
+        .photo-frame {
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+    </style>
+</head>
+<div class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+
+                <h2 class="featurette-heading">Исследователь </h2>
+                <p class="lead">Мухтар А.О. </p>
+                <p class="lead">Описание: Мухтар Ауэзов внес значительный вклад в изучение киргизского эпоса «Манас». Он одним из первых исследовал его как литературное и историко-культурное явление, анализируя художественные особенности, структуру и смысловую глубину эпоса..</p>
+                <a href="{% url 'main:muxtar' %}" type="button"
+                   class="btn btn-sm btn-outline-secondary">Узнать больше о Мухтар Ауэзове</a>
+            </div>
+            <div class="col-md-5">
+                         <img class="card card-img-top photo-frame"
+                         src="/media/researchers/fer.jpg" alt="Card image cap" width="100%" height="350">>
+            </div>
+    </div>
+
+</div>
+
+{% if researchers_list %}
+    {% for researchers in researchers_list %}
+        <hr class="featurette-divider">
+        <div class="row featurette">
+
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Исследователь </h2>
+                <p class="lead">{{ researchers.name }}</p>
+                <p class="lead">Описание: {{ researchers.researchers_description }}</p>
+                <a href="{% url 'main:researchers_detail' researchers.pk %}" type="button"
+                   class="btn btn-sm btn-outline-secondary">Узнать больше о {{ researchers.name }}</a>
+            </div>
+            <div class="col-md-5">
+
+                {% if researchers.researchers_photo %}
+                    <img class="card card-img-top photo-frame"
+                         src="{{ researchers.researchers_photo|my_media }}"
+                         alt="Card image cap" width="100%" height="350">
+                {% else %}
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                         role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title></title>
+                        <rect width="100%" height="100%" fill="#777"/>
+                        <text x="50%" y="50%" fill="#777" dy=".3em"></text>
+                    </svg>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+<hr class="featurette-divider">

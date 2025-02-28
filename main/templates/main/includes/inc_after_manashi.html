@@ -1,0 +1,35 @@
+{% load my_tags %}
+<head>
+    <style>
+        .card-img-top {
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+    </style>
+</head>
+<div class="row">
+    {% if manaschi_list %}
+        {% for manaschi in manaschi_list %}
+            <div class="col-lg-4">
+                {% if manaschi.manaschi_photo %}
+                    <img class="card card-img-top"
+                         src="{{ manaschi.manaschi_photo|my_media }}"
+                         alt="Card image cap" width="100%" height="350">
+                {% else %}
+                    <img class="card card-img-top"
+                         src="/media/users_avatar/pngtree-no-avatar-vector-isolated-on-white-background-png-image_4979074.jpg"
+                         alt="Card image cap" width="100%" height="350">
+                {% endif %}
+
+                <h2>{{ manaschi.manaschi_name }}</h2>
+                <p>Описание: {{ manaschi.manaschi_description }}</p>
+                <p><a class="btn btn-secondary" href="{% url 'main:manaschi_detail' manaschi.pk %}">О Манасчи {{ manaschi.manaschi_name }}</a>
+                </p>
+
+            </div><!-- /.col-lg-4 -->
+
+        {% endfor %}
+    {% endif %}
+</div><!-- /.row -->
